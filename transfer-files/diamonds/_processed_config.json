@@ -1,0 +1,136 @@
+{
+  "debug": false,
+  "tag": "tag",
+  "upsamaple_steps": [
+    2,
+    2,
+    2
+  ],
+  "backprojection": true,
+  "final_no_BP": true,
+  "checkpoint": "",
+  "ckpt_first_trained": false,
+  "fix_network": false,
+  "fine_tune": true,
+  "working_dir_base": "./results",
+  "network": "residual",
+  "res3d_up_method": "resize",
+  "num_epochs": 50000,
+  "fine_tuning_epochs_factor": 2,
+  "num_iter_per_epoch": 10,
+  "batch_size": 10,
+  "save_every": 5000,
+  "val_every": 500,
+  "prefix": "",
+  "dtype": "float32",
+  "data": {
+    "params": {
+      "frames_folder": "./Example_data/blur8/diamonds",
+      "prefix": "",
+      "hr_lr_relation": 0,
+      "gradient_percentile": 70,
+      "augmentation_params": {
+        "crop_sizes": {
+          "crop_size_spatial": 16,
+          "loss_mask_spatial": 0,
+          "crop_size_temporal": 16,
+          "loss_mask_temporal": 2
+        },
+        "spatial_resize_options": [
+          1.0,
+          0.9,
+          0.81,
+          0.73,
+          0.65,
+          0.59,
+          0.53,
+          0.47,
+          0.43,
+          0.38,
+          0.34,
+          0.31,
+          0.28,
+          0.25
+        ],
+        "temporal_jump_options": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "within": {
+          "probability": 0.4,
+          "flip_prob": 0.33,
+          "rotation_prob": 0.5,
+          "z_flip_prob": 0.33
+        },
+        "across": {
+          "probability": 0.4,
+          "prob_ver_new_z": 0.5,
+          "prob_hor_new_z": 0.5,
+          "new_z_sample_range": [
+            1,
+            2
+          ],
+          "flip_prob": 0.33,
+          "rotation_prob": 0.5,
+          "new_z_flip_prob": 0.33
+        },
+        "shift": {
+          "probability": 0.2,
+          "range_hor": [
+            -1,
+            1
+          ],
+          "range_ver": [
+            -1,
+            1
+          ],
+          "entire_pixels": true,
+          "prob_for_across": 0.3,
+          "flip_prob": 0.3,
+          "rotation_prob": 0.5,
+          "z_flip_prob": 0.0,
+          "valid": true
+        }
+      },
+      "eval_params": {
+        "size_frames": 16,
+        "size_height": 36,
+        "size_width": 36,
+        "pad_frames": 4,
+        "pad_height": 8,
+        "pad_width": 8
+      },
+      "dtype": "float32"
+    }
+  },
+  "loss": {
+    "name": "MSE",
+    "params": {}
+  },
+  "optimization": {
+    "name": "Adam",
+    "params": {
+      "lr": 0.001,
+      "SGD_momentum": 0.9
+    }
+  },
+  "lr_sched": {
+    "name": "StepLR",
+    "params": {
+      "gamma": 0.5,
+      "step_size": 0.25,
+      "milestones": [
+        30000,
+        40000,
+        45000
+      ]
+    }
+  },
+  "trainer": {
+    "working_dir": "./results/tag-v3",
+    "dtype": "float32"
+  }
+}
